@@ -1,16 +1,31 @@
 import repoService from '../services/repoSearchServices';
+import { User } from '../interfaces/repoSearchInterface';
 
 export default class {
-  static repoSearch(query: { q: string }) {
-    return new Promise((resolve, reject) => {
-      try {
-        const repoName: string = query.q;
-        const data = repoService.repoSearch(repoName);
-        return resolve(data);
-      } catch (error) {
-        console.log(error);
-        return reject(error);
+  static async repoSearch(query: { q: string }) {
+    try {
+      const repoName: string = query.q;
+      const data = await repoService.repoSearch(repoName);
+      if (data.total_count === 0) {
+        return { message: 'There is no such repository...' };
+      } else {
+        const output = {
+          data: [{}],
+        };
+
+        data.items.forEach((element: User) => {
+          const newResponse = {
+            repo_name: element.full_name,
+            owner_name: element.owner.login,
+            description: element.description,
+          };
+          output.data.push(newResponse);
+        });
+        return output;
       }
-    });
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   }
 }
