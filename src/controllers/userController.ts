@@ -1,11 +1,13 @@
-import UserModel from '../models/userSearchModel';
+import UserModel from '../models/saveUser.model';
+import findUserModel from '../models/findUser.model';
+
 import userService from '../services/user.services';
 
 export default class {
   static async getUserDetails(body: { username: string }) {
     try {
       const userName: string = body.username;
-      const userData = null;
+      const userData = await findUserModel.findData(userName);
       /* if user is present in our DB. */
       if (userData !== null) {
         return userData;
