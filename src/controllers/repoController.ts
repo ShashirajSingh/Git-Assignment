@@ -1,7 +1,7 @@
 import repoService from '../services/repo.services';
 import starService from '../services/star.service';
 
-import { User } from '../interfaces/repo.interface';
+import { Repo } from '../interfaces/repo.interface';
 
 export default class {
   static async repoSearch(query: { q: string }) {
@@ -15,7 +15,7 @@ export default class {
           data: [{}],
         };
 
-        data.items.forEach(async (element: User) => {
+        data.items.forEach(async (element: Repo) => {
           const starsData = await starService.starsData(
             element.owner.login,
             repoName

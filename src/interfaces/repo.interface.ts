@@ -1,4 +1,4 @@
-export interface User {
+export interface Repo {
   full_name: string;
   owner: { login: string };
   description: string;
