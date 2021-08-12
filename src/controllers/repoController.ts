@@ -1,5 +1,5 @@
 import repoService from '../services/repoSearchServices';
-import { User } from '../interfaces/repoSearchInterface';
+import { User } from '../interfaces/repo.interface';
 
 export default class {
   static async repoSearch(query: { q: string }) {

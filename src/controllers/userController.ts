@@ -6,7 +6,6 @@ export default class {
     try {
       const userName: string = headers.username;
       const userData = await UserModel.findOne({ userName });
-      console.log(userData);
 
       /* if user is present in our DB. */
       if (userData !== null) {
@@ -14,8 +13,7 @@ export default class {
       } else {
         const response = await userSearchServices.userSearch(userName);
         if (response.data) {
-          const a = await UserModel.insertMany(response);
-          console.log(a);
+          await UserModel.insertMany(response);
           return response.data;
         } else {
           return { message: 'No user found' };
