@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get('/repo', async (req: Request, res: Response) => {
   try {
-    const repoName: any = req.query;
-    const output = await repoSearchController.repoSearch(repoName);
+    const query: any = req.query;
+    const output = await repoSearchController.repoSearch(query);
     res.send(output);
   } catch (err) {
     res.status(400).send(err);
