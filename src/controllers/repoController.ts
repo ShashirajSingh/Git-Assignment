@@ -1,4 +1,6 @@
-import repoService from '../services/repoSearchServices';
+import repoService from '../services/repo.services';
+import starService from '../services/star.service';
+
 import { User } from '../interfaces/repo.interface';
 
 export default class {
@@ -13,11 +15,17 @@ export default class {
           data: [{}],
         };
 
-        data.items.forEach((element: User) => {
+        data.items.forEach(async (element: User) => {
+          const starsData = await starService.starsData(
+            element.owner.login,
+            repoName
+          );
+          console.log('starsData', starsData);
           const newResponse = {
             repo_name: element.full_name,
             owner_name: element.owner.login,
             description: element.description,
+            starts_count: 0,
           };
           output.data.push(newResponse);
         });
