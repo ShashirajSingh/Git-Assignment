@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import mongoose from 'mongoose';
-import { repoRoute } from './routes/repoRoute';
-import { userRoute } from './routes/userRoute';
+import { routes } from './routes/index';
+
 const app: Application = express();
 const port: number = 3000;
 
@@ -12,8 +12,7 @@ app.use(
   })
 );
 
-app.use('/', repoRoute);
-app.use('/', userRoute);
+app.use('/', routes);
 mongoose.connect(
   `mongodb://localhost:27017/deqode-dev`,
   {

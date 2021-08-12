@@ -3,14 +3,11 @@ import repoSearchController from '../controllers/repoSearchController';
 
 const router = express.Router();
 
-router.get('/repo', async (req: Request, res: Response) => {
-  try {
-    const query: any = req.query;
-    const output = await repoSearchController.repoSearch(query);
-    res.send(output);
-  } catch (err) {
-    res.status(400).send(err);
-  }
+router.get('/', async (req: Request, res: Response) => {
+  console.log('repo route');
+  const query: any = req.query;
+  const output = await repoSearchController.repoSearch(query);
+  res.send(output);
 });
 
 export { router as repoRoute };

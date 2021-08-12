@@ -5,7 +5,7 @@ export default class {
   static async repoSearch(query: { q: string }) {
     try {
       const repoName: string = query.q;
-      const data = await repoService.repoSearch(repoName);
+      const data = await repoService.search(repoName);
       if (data.total_count === 0) {
         return { message: 'There is no such repository...' };
       } else {
