@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import repoService from '../services/repo.services';
+import repoService from '../services/repo.service';
 import { Repo } from '../interfaces/repo.interface';
 
 export default class {
