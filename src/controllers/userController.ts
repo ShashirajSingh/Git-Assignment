@@ -13,8 +13,8 @@ export default class {
       } else {
         const response = await userService.userSearch(userName);
         if (response.data) {
-          await userModel.create(response.data);
-          return response.data;
+          const responseData = await userModel.create(response.data);
+          return responseData;
         } else {
           return { message: 'No user found' };
         }

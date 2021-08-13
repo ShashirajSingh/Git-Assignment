@@ -37,4 +37,4 @@ const UserSchema = new mongoose.Schema({
   created_at: String,
   updated_at: String,
 });
-export default mongoose.model(`Usersdata`, UserSchema);
+export default mongoose.model(`User`, UserSchema);

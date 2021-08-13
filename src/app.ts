@@ -14,7 +14,7 @@ app.use(
 
 app.use('/', routes);
 mongoose.connect(
-  `mongodb://localhost:27017/deqode-dev`,
+  `${process.env.DB_URL}`,
   {
     useUnifiedTopology: true,
     useNewUrlParser: true,
