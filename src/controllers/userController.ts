@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import userModel from '../models/user.model';
-import userService from '../services/user.services';
+import userService from '../services/user.service';
+import responseFormat from '../services/response.service';
 
 export default class {
   static async getUserDetails(req: Request, res: Response) {
@@ -9,12 +10,19 @@ export default class {
       const userData = await userModel.findOne({ login: `${userName}` });
       /* if user is present in our DB. */
       if (userData !== null) {
-        res.send(userData);
+        const apiResponse = responseFormat.success('Success', userData, 200);
+        res.send(apiResponse);
       } else {
         const response = await userService.userSearch(userName);
         if (response.data) {
           const responseData = await userModel.create(response.data);
-          res.send(responseData);
+          const apiResponse = responseFormat.success(
+            'Success',
+            responseData,
+            200
+          );
+
+          res.send(apiResponse);
         } else {
           res.send({ message: 'No user found' });
         }
