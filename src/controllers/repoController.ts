@@ -16,7 +16,7 @@ export default class {
         };
         data.items.forEach(async (element: Repo) => {
           const newResponse = {
-            repo_name: element.full_name,
+            repo_name: element.name,
             owner_name: element.owner.login,
             description: element.description,
             html_url: element.html_url,

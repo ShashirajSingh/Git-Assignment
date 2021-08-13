@@ -1,4 +1,4 @@
-import userModel from '../models/saveUser.model';
+import userModel from '../models/user.model';
 
 import userService from '../services/user.services';
 

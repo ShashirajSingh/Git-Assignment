@@ -1,5 +1,5 @@
 export interface Repo {
-  full_name: string;
+  name: string;
   owner: { login: string };
   description: string;
   html_url: string;
