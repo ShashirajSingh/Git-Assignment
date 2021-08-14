@@ -1,17 +1,27 @@
 import { Request, Response } from 'express';
 import repoService from '../services/repo.service';
 import { Repo } from '../interfaces/repo.interface';
+import responseService from '../services/response.service';
 
 export default class {
   static async repoSearch(req: Request, res: Response) {
     try {
       if (!req.query.q) {
-        res.send({ message: 'please provide a valid repository name.' });
+        const apiResponse = responseService.success(
+          'please provide a valid repository name.',
+          {},
+          403
+        );
+        res.send(apiResponse);
       } else {
         const repoName: any = req.query.q;
         const data = await repoService.search(repoName);
         if (data.total_count === 0) {
-          res.send({ message: 'There is no such repository.' });
+          const apiResponse = responseService.success(
+            'There is no such repository.',
+            {}
+          );
+          res.send(apiResponse);
         } else {
           const contents: object[] = [];
           const output = {
@@ -27,7 +37,8 @@ export default class {
             };
             output.contents.push(newResponse);
           });
-          res.send(output);
+          const apiResponse = responseService.success('success', output);
+          res.send(apiResponse);
         }
       }
     } catch (error) {
